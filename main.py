@@ -19,7 +19,8 @@ def main() -> None:
             DoubleMarkovChainPlayer(name='E-DM-4', chain_length=4),
             BeatPreviousMovePlayer(name='E-BPM'),
             BeatenByPreviousMovePlayer(name='E-BBPM')
-        ]
+        ],
+        deterministic=True
     )
     players = [
         ensemble_player,
@@ -41,7 +42,7 @@ def main() -> None:
 
     nsp = max(len(p.name) for p in players)
     for p1, p2 in get_all_pairs(players):
-        m = Match(p1, p2)
+        m = Match(p1, p2, 20000)
         print(f'***** {p1.name} vs {p2.name} *****')
         sp = ceil(log10(m.rounds)) + 1
         scores = m.play()
