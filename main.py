@@ -12,9 +12,9 @@ from rps.rps import *
 def main() -> None:
     players = [
         RandomPlayer(name='Random'),
-        ConstantPlayer(name='Rock', move=RPS.ROCK),
-        ConstantPlayer(name='Paper', move=RPS.PAPER),
-        ConstantPlayer(name='Scissor', move=RPS.SCISSORS),
+        ConstantPlayer(name='Rock', symbol=RPS.ROCK),
+        ConstantPlayer(name='Paper', symbol=RPS.PAPER),
+        ConstantPlayer(name='Scissor', symbol=RPS.SCISSORS),
         BeatPreviousMovePlayer(name='BeatPreviousMove'),
         BeatenByPreviousMovePlayer(name='BeatenByPreviousMove'),
         PatternPlayer(name='RP', pattern=[RPS.ROCK, RPS.PAPER]),
