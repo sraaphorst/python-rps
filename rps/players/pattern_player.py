@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from typing import final, Sequence
 
 from .abstract_rps_player import AbstractRPSPlayer
-from rps import RPS
+from rps.rps import RPS
 
 __all__ = ['PatternPlayer']
 

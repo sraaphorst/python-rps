@@ -2,16 +2,14 @@
 # For license information see LICENSE or https://opensource.org/licenses/BSD-3-Clause
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from uuid import uuid4
+from dataclasses import dataclass
 
-from rps import RPS
+from rps.rps import RPS
 
 
 @dataclass
 class AbstractRPSPlayer(ABC):
     name: str
-    uuid: uuid4 = field(init=False, default=lambda: uuid4())
 
     """
     Generic interface to be implemented by an RPS player.

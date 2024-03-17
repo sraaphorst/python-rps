@@ -3,26 +3,27 @@
 
 from math import ceil, log10
 
-from common import get_all_pairs
-from match import *
-from players import *
-from rps import *
+from rps.common import get_all_pairs
+from rps.match import *
+from rps.players import *
+from rps.rps import *
 
 
 def main() -> None:
     players = [
-        RandomPlayer(name='RandomPlayer'),
-        ConstantPlayer(name='RockPlayer', move=RPS.ROCK),
-        ConstantPlayer(name='PaperPlayer', move=RPS.PAPER),
-        ConstantPlayer(name='ScissorPlayer', move=RPS.SCISSORS),
-        PatternPlayer(name='RPPlayer', pattern=[RPS.ROCK, RPS.PAPER]),
-        PatternPlayer(name='RPSPlayer', pattern=[RPS.ROCK, RPS.PAPER, RPS.SCISSORS]),
-        MarkovChainPlayer(name='1-MarkovChainPlayer', chain_length=1),
-        MarkovChainPlayer(name='2-MarkovChainPlayer', chain_length=2),
-        MarkovChainPlayer(name="3-MarkovChainPlayer", chain_length=3),
-        DoubleMarkovChainPlayer(name="1-DoubleMarkovChainPlayer", chain_length=1),
-        DoubleMarkovChainPlayer(name="2-DoubleMarkovChainPlayer", chain_length=2),
-        DoubleMarkovChainPlayer(name="3-DoubleMarkovChainPlayer", chain_length=3),
+        RandomPlayer(name='Random'),
+        ConstantPlayer(name='Rock', move=RPS.ROCK),
+        ConstantPlayer(name='Paper', move=RPS.PAPER),
+        ConstantPlayer(name='Scissor', move=RPS.SCISSORS),
+        BeatPreviousMovePlayer(name='BeatPreviousMove'),
+        PatternPlayer(name='RP', pattern=[RPS.ROCK, RPS.PAPER]),
+        PatternPlayer(name='RPS', pattern=[RPS.ROCK, RPS.PAPER, RPS.SCISSORS]),
+        MarkovChainPlayer(name='1-MarkovChain', chain_length=1),
+        MarkovChainPlayer(name='2-MarkovChain', chain_length=2),
+        MarkovChainPlayer(name="3-MarkovChain", chain_length=3),
+        DoubleMarkovChainPlayer(name="1-DoubleMarkovChain", chain_length=1),
+        DoubleMarkovChainPlayer(name="2-DoubleMarkovChain", chain_length=2),
+        DoubleMarkovChainPlayer(name="3-DoubleMarkovChain", chain_length=3),
     ]
 
     nsp = max(len(p.name) for p in players)
@@ -40,3 +41,8 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Others:
+# Play with probabilities - generalization of random, which is just default values 1/3.
+# Play last player's move.
+# Play the move that is not the last player's move and would not beat the last player's move.

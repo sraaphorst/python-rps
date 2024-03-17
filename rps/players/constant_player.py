@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import final
 
 from .abstract_rps_player import AbstractRPSPlayer
-from rps import RPS
+from rps.rps import RPS
 
 __all__ = ["ConstantPlayer"]
 

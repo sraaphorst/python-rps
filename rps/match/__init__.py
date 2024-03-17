@@ -2,11 +2,11 @@
 # For license information see LICENSE or https://opensource.org/licenses/BSD-3-Clause
 
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import final, Final
 
-from players import AbstractRPSPlayer
-from rps import rps_compare, Outcome
+from rps.players import AbstractRPSPlayer
+from rps.rps import rps_compare, Outcome
 
 default_rounds: Final[int] = 1000
 
