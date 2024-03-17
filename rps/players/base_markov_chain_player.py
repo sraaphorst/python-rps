@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 import random
 
 from .abstract_rps_player import AbstractRPSPlayer
-from rps.rps import rps_beat, rps_random, RPS
+from rps.rps import rps_beater, rps_random, RPS
 
 __all__ = ['BaseMarkovChainPlayer']
 
@@ -50,6 +50,6 @@ class BaseMarkovChainPlayer(AbstractRPSPlayer):
         for rps, count in counts.items():
             cumulative += count
             if n < cumulative:
-                return rps_beat(rps)
+                return rps_beater(rps)
 
         raise ValueError(f'Could not determine next move for player {self.name}.')

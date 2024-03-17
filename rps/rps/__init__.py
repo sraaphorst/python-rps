@@ -10,7 +10,8 @@ __all__ = [
     'Outcome',
     'RPS',
     'rps_random',
-    'rps_beat',
+    'rps_beater',
+    'rps_beating',
     'rps_compare',
 ]
 
@@ -42,7 +43,7 @@ def rps_random() -> RPS:
     return random.choice(list(RPS))
 
 
-def rps_beat(rps: RPS) -> RPS:
+def rps_beater(rps: RPS) -> RPS:
     """
     Given a symbol, determine what will beat it.
     """
@@ -50,6 +51,16 @@ def rps_beat(rps: RPS) -> RPS:
         case RPS.ROCK: return RPS.PAPER
         case RPS.PAPER: return RPS.SCISSORS
         case RPS.SCISSORS: return RPS.ROCK
+
+
+def rps_beating(rps: RPS) -> RPS:
+    """
+    Given a symbol, find the symbol that it beats.
+    """
+    match rps:
+        case RPS.ROCK: return RPS.SCISSORS
+        case RPS.PAPER: return RPS.ROCK
+        case RPS.SCISSORS: return RPS.PAPER
 
 
 def rps_compare(a: RPS, b: RPS) -> Outcome:
@@ -64,3 +75,4 @@ def rps_compare(a: RPS, b: RPS) -> Outcome:
         case (RPS.SCISSORS, RPS.ROCK): return Outcome.LOSE
         case (RPS.SCISSORS, RPS.PAPER): return Outcome.WIN
         case _: return Outcome.TIE
+

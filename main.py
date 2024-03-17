@@ -16,6 +16,7 @@ def main() -> None:
         ConstantPlayer(name='Paper', move=RPS.PAPER),
         ConstantPlayer(name='Scissor', move=RPS.SCISSORS),
         BeatPreviousMovePlayer(name='BeatPreviousMove'),
+        BeatenByPreviousMovePlayer(name='BeatenByPreviousMove'),
         PatternPlayer(name='RP', pattern=[RPS.ROCK, RPS.PAPER]),
         PatternPlayer(name='RPS', pattern=[RPS.ROCK, RPS.PAPER, RPS.SCISSORS]),
         MarkovChainPlayer(name='1-MarkovChain', chain_length=1),
