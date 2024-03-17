@@ -6,14 +6,14 @@ from collections import Counter
 from dataclasses import dataclass, field
 import random
 
-from .abstract_rps_player import AbstractRPSPlayer
+from .abstract_player import AbstractPlayer
 from rps.rps import rps_beater, rps_random, RPS
 
 __all__ = ['BaseMarkovChainPlayer']
 
 
 @dataclass
-class BaseMarkovChainPlayer(AbstractRPSPlayer):
+class BaseMarkovChainPlayer(AbstractPlayer):
     chain_length: int = 1
 
     # _count_matrix keeps track of the counts of what was played by the opponent to determine
@@ -34,7 +34,7 @@ class BaseMarkovChainPlayer(AbstractRPSPlayer):
         self._count_matrix.clear()
         self._other_tuple = ()
 
-    def next_move(self) -> RPS:
+    def next_move(self, round_number: int) -> RPS:
         if len(self._other_tuple) < self.chain_length:
             return rps_random()
 

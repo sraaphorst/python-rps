@@ -8,18 +8,11 @@ from rps.rps import RPS
 
 
 @dataclass
-class AbstractRPSPlayer(ABC):
-    name: str
-
+class AbstractPlayer(ABC):
     """
     Generic interface to be implemented by an RPS player.
     """
-    @abstractmethod
-    def next_move(self) -> RPS:
-        """
-        Prompt the player for a next move.
-        """
-        pass
+    name: str
 
     def reset(self) -> None:
         """
@@ -27,7 +20,14 @@ class AbstractRPSPlayer(ABC):
         """
         pass
 
-    def record_round(self, round_ct: int, player: RPS, other: RPS) -> None:
+    @abstractmethod
+    def next_move(self, round_number: int) -> RPS:
+        """
+        Prompt the player for a next move.
+        """
+        pass
+
+    def record_round(self, round_number: int, player_symbol: RPS, opponent_symbol: RPS) -> None:
         """
         Record the details of a round.
         Provides the move made by this player and the other player.

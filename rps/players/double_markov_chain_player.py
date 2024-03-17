@@ -23,17 +23,17 @@ class DoubleMarkovChainPlayer(BaseMarkovChainPlayer):
         super().reset()
         self._my_tuple = ()
 
-    def record_round(self, round_ct: int, player: RPS, other: RPS) -> None:
+    def record_round(self, round_number: int, player_symbol: RPS, opponent_symbol: RPS) -> None:
         if len(self._my_tuple) != len(self._other_tuple):
             raise RuntimeError(f'{self.name} has uneven keys: {self._my_tuple}, {self._other_tuple}')
 
         if len(self._other_tuple) == self.chain_length:
             key = self._get_transition_key()
             ctr = self._count_matrix.setdefault(key, Counter())
-            ctr[other] += 1
+            ctr[opponent_symbol] += 1
 
-            self._my_tuple = self._my_tuple[1:] + (player,)
-            self._other_tuple = self._other_tuple[1:] + (other,)
+            self._my_tuple = self._my_tuple[1:] + (player_symbol,)
+            self._other_tuple = self._other_tuple[1:] + (opponent_symbol,)
         else:
-            self._my_tuple += (player,)
-            self._other_tuple += (other,)
+            self._my_tuple += (player_symbol,)
+            self._other_tuple += (opponent_symbol,)

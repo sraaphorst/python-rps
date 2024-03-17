@@ -21,10 +21,10 @@ class MarkovChainPlayer(BaseMarkovChainPlayer):
     def _get_transition_key(self) -> tuple[RPS, ...]:
         return self._other_tuple
 
-    def record_round(self, round_ct: int, player: RPS, other: RPS) -> None:
+    def record_round(self, round_number: int, player_symbol: RPS, opponent_symbol: RPS) -> None:
         if len(self._other_tuple) == self.chain_length:
             ctr = self._count_matrix.setdefault(self._other_tuple, Counter())
-            ctr[other] += 1
-            self._other_tuple = self._other_tuple[1:] + (other,)
+            ctr[opponent_symbol] += 1
+            self._other_tuple = self._other_tuple[1:] + (opponent_symbol,)
         else:
-            self._other_tuple += (other,)
+            self._other_tuple += (opponent_symbol,)

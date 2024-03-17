@@ -4,7 +4,7 @@
 from dataclasses import dataclass
 from typing import final, Callable, Optional
 
-from .abstract_rps_player import AbstractRPSPlayer
+from .abstract_player import AbstractPlayer
 from rps.rps import rps_beater, rps_beating, rps_random, RPS
 
 __all__ = [
@@ -15,7 +15,7 @@ __all__ = [
 
 
 @dataclass
-class PreviousSymbolFunctionPlayer(AbstractRPSPlayer):
+class PreviousSymbolFunctionPlayer(AbstractPlayer):
     """
     A player that invokes a function based on the last symbol played by the opponent to determine
     the next symbol to play.
@@ -23,13 +23,13 @@ class PreviousSymbolFunctionPlayer(AbstractRPSPlayer):
     function: Callable[[RPS], RPS]
     _previous_move: Optional[RPS] = None
 
-    def next_move(self) -> RPS:
+    def next_move(self, round_number: int) -> RPS:
         if self._previous_move is None:
             return rps_random()
         return self.function(self._previous_move)
 
-    def record_round(self, round_ct: int, player: RPS, other: RPS) -> None:
-        self._previous_move = other
+    def record_round(self, round_number: int, player_symbol: RPS, opponent_symbol: RPS) -> None:
+        self._previous_move = opponent_symbol
 
 
 @final

@@ -4,9 +4,9 @@
 from dataclasses import dataclass, field
 from math import fabs
 from typing import final, ClassVar
-import random
 
-from .abstract_rps_player import AbstractRPSPlayer
+from .abstract_player import AbstractPlayer
+from rps.common import probability_selector
 from rps.rps import rps_random, RPS
 
 __all__ = [
@@ -17,7 +17,7 @@ __all__ = [
 
 
 @dataclass
-class ProbabilityPlayer(AbstractRPSPlayer):
+class ProbabilityPlayer(AbstractPlayer):
     probability_map: dict[RPS, float]
 
     # Threshold for probability to vary from 1.
@@ -27,16 +27,9 @@ class ProbabilityPlayer(AbstractRPSPlayer):
         if fabs(sum(self.probability_map.values()) - 1) > self._threshold:
             raise ValueError(f'Probability map does not sum to 1: {self.probability_map}')
 
-    def next_move(self) -> RPS:
-        prob = random.random()
-        cumulative = 0
-        for key, value in self.probability_map.items():
-            cumulative += value
-            if prob < cumulative:
-                return key
-
-        # If there is a slight deviation in probabilities, return a random value.
-        return rps_random()
+    def next_move(self, round_number: int) -> RPS:
+        move = probability_selector(self.probability_map)
+        return move if move is not None else rps_random()
 
 
 @final

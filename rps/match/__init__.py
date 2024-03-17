@@ -5,7 +5,7 @@ from collections import Counter
 from dataclasses import dataclass
 from typing import final, Final
 
-from rps.players import AbstractRPSPlayer
+from rps.players import AbstractPlayer
 from rps.rps import rps_compare, Outcome
 
 default_rounds: Final[int] = 1000
@@ -14,8 +14,8 @@ default_rounds: Final[int] = 1000
 @final
 @dataclass
 class Match:
-    player1: AbstractRPSPlayer
-    player2: AbstractRPSPlayer
+    player1: AbstractPlayer
+    player2: AbstractPlayer
     rounds: int = default_rounds
 
     def __post_init__(self):
@@ -34,11 +34,11 @@ class Match:
         p1_scores: Counter[Outcome] = Counter()
         p2_scores: Counter[Outcome] = Counter()
 
-        for round_ct in range(self.rounds):
-            move1 = self.player1.next_move()
-            move2 = self.player2.next_move()
-            self.player1.record_round(round_ct, move1, move2)
-            self.player2.record_round(round_ct, move2, move1)
+        for round_number in range(self.rounds):
+            move1 = self.player1.next_move(round_number)
+            move2 = self.player2.next_move(round_number)
+            self.player1.record_round(round_number, move1, move2)
+            self.player2.record_round(round_number, move2, move1)
 
             p1_scores[rps_compare(move1, move2)] += 1
             p2_scores[rps_compare(move2, move1)] += 1
